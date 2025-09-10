@@ -354,14 +354,14 @@ export default function SignUp() {
                       {isLoading ? (
                         <div className="flex items-center justify-center space-x-2">
                           <div className="w-3 h-3 border-2 border-white/60 border-t-white rounded-full animate-spin"></div>
-                          <span className="text-white font-medium tracking-wide text-sm">Creating Neural Profile...</span>
+                          <span className="text-white font-medium tracking-wide text-sm">Creating Account...</span>
                         </div>
                       ) : (
                         <div className="flex items-center justify-center space-x-2">
                           <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                           </svg>
-                          <span className="text-white font-medium tracking-wide text-sm">Create Neural ID</span>
+                          <span className="text-white font-medium tracking-wide text-sm">Create Account</span>
                         </div>
                       )}
                     </div>
@@ -371,7 +371,7 @@ export default function SignUp() {
                 {/* Sign In Link */}
                 <div className={`mt-4 text-center transition-all duration-1500 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
                   <p className="text-slate-400 text-xs tracking-wide">
-                    Already have a Neural ID?{' '}
+                    Already have a Account?{' '}
                     <Link 
                       href="/auth/signin" 
                       className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors duration-300 hover:underline tracking-wider"
