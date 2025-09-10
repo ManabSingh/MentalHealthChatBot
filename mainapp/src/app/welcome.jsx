@@ -1,3 +1,4 @@
+
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -116,128 +117,134 @@ export default function Welcome() {
           </div>
 
           {/* Advanced subtitle with holographic effect */}
-<div
-  className={`mb-16 transition-all delay-700 ${
-    mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-  }`}
-  style={{ transitionDuration: "2000ms" }} // Fix for duration-2000
->
-  <div className="relative max-w-4xl mx-auto">
-    <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
-      Experience the{" "}
-      <span className="relative inline-block">
-        <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium animate-gradient-shift bg-size-200">
-          next evolution
-        </span>
-        <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-400/60 to-transparent"></span>
-      </span>{''}
-      <span className="text-lg text-slate-400 block mt-4 animate-fade-in-up">
-        Where artificial intelligence meets authentic human care in perfect
-        harmony.
-      </span>
-    </p>
-  </div>
-</div>
+          <div
+            className={`mb-16 transition-all delay-700 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+            style={{ transitionDuration: "2000ms" }}
+          >
+            <div className="relative max-w-4xl mx-auto">
+              <p className="text-xl md:text-2xl text-slate-300 leading-relaxed font-light">
+                Experience the{" "}
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-medium animate-gradient-shift bg-size-200">
+                    next evolution
+                  </span>
+                  <span className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-400/60 to-transparent"></span>
+                </span>
+                {' '}of mental wellness technology.
+                <span className="text-lg text-slate-400 block mt-4 animate-fade-in-up">
+                  Where artificial intelligence meets authentic human care in perfect
+                  harmony.
+                </span>
+              </p>
+            </div>
+          </div>
 
           {/* Ultra-premium action buttons */}
           <div className={`mb-16 transition-all duration-2000 delay-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-2xl mx-auto">
               
-             {/* Sign In Button (same design as Sign Up) */}
-<button
-  onMouseEnter={() => setIsHovering('signin')}
-  onMouseLeave={() => setIsHovering('')}
-  className="group relative w-full lg:w-auto px-12 py-6 bg-black/40 backdrop-blur-xl rounded-2xl font-bold text-lg text-white overflow-hidden shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-transparent hover:border-gradient"
->
-  {/* Animated gradient border */}
-  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-  <div className="absolute inset-[2px] rounded-xl bg-black/80 backdrop-blur-xl"></div>
+              {/* Sign Up Button */}
+              <Link href="/signup" className="w-full lg:w-auto">
+                <button
+                  onMouseEnter={() => setIsHovering('signup')}
+                  onMouseLeave={() => setIsHovering('')}
+                  className="group relative w-full px-12 py-6 bg-black/40 backdrop-blur-xl rounded-2xl font-bold text-lg text-white overflow-hidden shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-transparent hover:border-gradient"
+                >
+                  {/* Animated gradient border */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+                  <div className="absolute inset-[2px] rounded-xl bg-black/80 backdrop-blur-xl"></div>
 
-  {/* Glowing particles effect */}
-  <div className="absolute inset-0 overflow-hidden rounded-2xl">
-    {[...Array(6)].map((_, i) => (
-      <div
-        key={i}
-        className={`absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-particle-float`}
-        style={{
-          left: `${20 + i * 10}%`,
-          top: `${30 + i * 8}%`,
-          animationDelay: `${i * 0.2}s`,
-        }}
-      ></div>
-    ))}
-  </div>
+                  {/* Glowing particles effect */}
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-particle-float`}
+                        style={{
+                          left: `${20 + i * 10}%`,
+                          top: `${30 + i * 8}%`,
+                          animationDelay: `${i * 0.2}s`,
+                        }}
+                      ></div>
+                    ))}
+                  </div>
 
-  <div className="relative z-10 flex items-center justify-center space-x-3">
-    <div
-      className={`transition-all duration-300 ${
-        isHovering === 'signin' ? 'rotate-180 scale-110' : ''
-      }`}
-    >
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 12H3m0 0l4 4m-4-4l4-4"
-        />
-      </svg>
-    </div>
-    <span className="tracking-wider">Sign Up</span>
-    <div className="flex space-x-1 ml-2">
-      <div className="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-      <div className="w-1 h-1 bg-purple-400 rounded-full animate-ping delay-100"></div>
-      <div className="w-1 h-1 bg-pink-400 rounded-full animate-ping delay-200"></div>
-    </div>
-  </div>
-</button>
-              {/* New User Button */}
-              
-              <button
-                onMouseEnter={() => setIsHovering('signup')}
-                onMouseLeave={() => setIsHovering('')}
-                className="group relative w-full lg:w-auto px-12 py-6 bg-black/40 backdrop-blur-xl rounded-2xl font-bold text-lg text-white overflow-hidden shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-transparent hover:border-gradient"
-              >
-                {/* Animated gradient border */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-                <div className="absolute inset-[2px] rounded-xl bg-black/80 backdrop-blur-xl"></div>
-                
-                {/* Glowing particles effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                  {[...Array(6)].map((_, i) => (
+                  <div className="relative z-10 flex items-center justify-center space-x-3">
                     <div
-                      key={i}
-                      className={`absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-particle-float`}
-                      style={{
-                        left: `${20 + (i * 10)}%`,
-                        top: `${30 + (i * 8)}%`,
-                        animationDelay: `${i * 0.2}s`
-                      }}
-                    ></div>
-                  ))}
-                </div>
+                      className={`transition-all duration-300 ${
+                        isHovering === 'signup' ? 'rotate-180 scale-110' : ''
+                      }`}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                    </div>
+                    <span className="tracking-wider">Register</span>
+                    <div className="flex space-x-1 ml-2">
+                      <div className="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                      <div className="w-1 h-1 bg-purple-400 rounded-full animate-ping delay-100"></div>
+                      <div className="w-1 h-1 bg-pink-400 rounded-full animate-ping delay-200"></div>
+                    </div>
+                  </div>
+                </button>
+              </Link>
 
-                <div className="relative z-10 flex items-center justify-center space-x-3">
-                  <div className={`transition-all duration-300 ${isHovering === 'signup' ? 'rotate-180 scale-110' : ''}`}>
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+              {/* Sign In Button */}
+              <Link href="/signin" className="w-full lg:w-auto">
+                <button
+                  onMouseEnter={() => setIsHovering('signin')}
+                  onMouseLeave={() => setIsHovering('')}
+                  className="group relative w-full px-12 py-6 bg-black/40 backdrop-blur-xl rounded-2xl font-bold text-lg text-white overflow-hidden shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-transparent hover:border-gradient"
+                >
+                  {/* Animated gradient border */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+                  <div className="absolute inset-[2px] rounded-xl bg-black/80 backdrop-blur-xl"></div>
+                  
+                  {/* Glowing particles effect */}
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`absolute w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-particle-float`}
+                        style={{
+                          left: `${20 + (i * 10)}%`,
+                          top: `${30 + (i * 8)}%`,
+                          animationDelay: `${i * 0.2}s`
+                        }}
+                      ></div>
+                    ))}
                   </div>
-                  <span className="tracking-wider">Sign In</span>
-                  <div className="flex space-x-1 ml-2">
-                    <div className="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
-                    <div className="w-1 h-1 bg-purple-400 rounded-full animate-ping delay-100"></div>
-                    <div className="w-1 h-1 bg-pink-400 rounded-full animate-ping delay-200"></div>
+
+                  <div className="relative z-10 flex items-center justify-center space-x-3">
+                    <div className={`transition-all duration-300 ${isHovering === 'signin' ? 'rotate-180 scale-110' : ''}`}>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H3m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                    </div>
+                    <span className="tracking-wider">Sign In</span>
+                    <div className="flex space-x-1 ml-2">
+                      <div className="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                      <div className="w-1 h-1 bg-purple-400 rounded-full animate-ping delay-100"></div>
+                      <div className="w-1 h-1 bg-pink-400 rounded-full animate-ping delay-200"></div>
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              </Link>
             </div>
           </div>
+
           {/* Advanced trust indicators with holographic styling */}
           <div className={`transition-all duration-2000 delay-1200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
