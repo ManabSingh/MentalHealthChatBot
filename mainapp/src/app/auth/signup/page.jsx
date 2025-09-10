@@ -1,48 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-// Add this import at the top
-import { authAPI, tokenManager } from '../../lib/auth';
-
-// Replace your handleSubmit function with:
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-  
-  try {
-    // Validate passwords match
-    if (formData.password !== formData.confirmPassword) {
-      throw new Error('Passwords do not match');
-    }
-
-    // Call backend API
-    const response = await authAPI.signup({
-      fullName: formData.fullName,
-      email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword
-    });
-    
-    // Store tokens
-    tokenManager.setTokens(
-      response.data.tokens.accessToken,
-      response.data.tokens.refreshToken
-    );
-    
-    // Success feedback
-    console.log('Neural profile created successfully:', response.data.user);
-    
-    // Redirect to dashboard or show success message
-    window.location.href = '/dashboard';
-    
-  } catch (error) {
-    console.error('Signup failed:', error.message);
-    // You can add a state for error display
-    alert(`Signup failed: ${error.message}`);
-  } finally {
-    setIsLoading(false);
-  }
-};
 
 export default function SignUp() {
   const [mounted, setMounted] = useState(false);
@@ -58,6 +16,59 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  // Backend API Functions
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+
+  const authAPI = {
+    signup: async (userData) => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || 'Signup failed');
+        }
+        
+        return data;
+      } catch (error) {
+        throw new Error(error.message || 'Network error occurred');
+      }
+    }
+  };
+
+  const tokenManager = {
+    setTokens: (accessToken, refreshToken) => {
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+    },
+    
+    getAccessToken: () => {
+      return localStorage.getItem('accessToken');
+    },
+    
+    getRefreshToken: () => {
+      return localStorage.getItem('refreshToken');
+    },
+    
+    clearTokens: () => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    },
+    
+    isAuthenticated: () => {
+      return !!localStorage.getItem('accessToken');
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -79,18 +90,96 @@ export default function SignUp() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    
+    // Clear errors when user starts typing
+    if (error) setError('');
+  };
+
+  const validateForm = () => {
+    if (!formData.fullName.trim()) {
+      setError('Full name is required');
+      return false;
+    }
+    
+    if (!formData.email.trim()) {
+      setError('Email is required');
+      return false;
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+    
+    if (!formData.password) {
+      setError('Password is required');
+      return false;
+    }
+    
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      return false;
+    }
+    
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/.test(formData.password)) {
+      setError('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character');
+      return false;
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return false;
+    }
+    
+    if (!formData.agreeToTerms) {
+      setError('You must agree to the terms and conditions');
+      return false;
+    }
+    
+    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Call backend API
+      const response = await authAPI.signup({
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword
+      });
+      
+      // Store tokens
+      tokenManager.setTokens(
+        response.data.tokens.accessToken,
+        response.data.tokens.refreshToken
+      );
+      
+      // Success feedback
+      setSuccess('Neural profile created successfully! Redirecting to dashboard...');
+      console.log('Neural profile created successfully:', response.data.user);
+      
+      // Redirect to dashboard after a brief delay
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Signup failed:', error.message);
+      setError(error.message || 'Failed to create account. Please try again.');
+    } finally {
       setIsLoading(false);
-      console.log('Sign-up data:', formData);
-      // Handle sign-up logic here
-    }, 2000);
+    }
   };
 
   return (
@@ -170,7 +259,7 @@ export default function SignUp() {
             
             <div className="relative bg-black/50 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
               {/* Floating particles inside container */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
                 {[...Array(8)].map((_, i) => (
                   <div
                     key={i}
@@ -218,6 +307,29 @@ export default function SignUp() {
                   </p>
                 </div>
 
+                {/* Error/Success Messages */}
+                {error && (
+                  <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <div className="flex items-center space-x-2">
+                      <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.232 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      </svg>
+                      <p className="text-red-400 text-sm font-medium">{error}</p>
+                    </div>
+                  </div>
+                )}
+
+                {success && (
+                  <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-xl">
+                    <div className="flex items-center space-x-2">
+                      <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <p className="text-green-400 text-sm font-medium">{success}</p>
+                    </div>
+                  </div>
+                )}
+
                 {/* Sign-Up Form with ultra-modern styling */}
                 <form onSubmit={handleSubmit} className={`space-y-3 transition-all duration-1500 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   
@@ -239,11 +351,13 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('fullName')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm relative z-10"
                         placeholder="Enter your full name"
                         required
                       />
-                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'fullName' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      {focusedField === 'fullName' && (
+                        <div className="absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 pointer-events-none animate-pulse"></div>
+                      )}
                     </div>
                   </div>
 
@@ -265,11 +379,13 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('email')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm relative z-10"
                         placeholder="Enter your email address"
                         required
                       />
-                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'email' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      {focusedField === 'email' && (
+                        <div className="absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 pointer-events-none animate-pulse"></div>
+                      )}
                     </div>
                   </div>
 
@@ -291,14 +407,14 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('password')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-purple-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-purple-400/50 transition-all duration-500 font-medium tracking-wide text-sm relative z-10"
                         placeholder="Create a password"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-purple-400 transition-colors duration-300"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-purple-400 transition-colors duration-300 z-20"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {showPassword ? (
@@ -308,7 +424,9 @@ export default function SignUp() {
                           )}
                         </svg>
                       </button>
-                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-purple-400/50 via-pink-400/50 to-cyan-400/50 transition-all duration-500 ${focusedField === 'password' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      {focusedField === 'password' && (
+                        <div className="absolute inset-0 rounded-xl border-2 border-gradient-to-r from-purple-400/50 via-pink-400/50 to-cyan-400/50 pointer-events-none animate-pulse"></div>
+                      )}
                     </div>
                   </div>
 
@@ -330,14 +448,14 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('confirmPassword')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-green-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-green-400/50 transition-all duration-500 font-medium tracking-wide text-sm relative z-10"
                         placeholder="Confirm your password"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-green-400 transition-colors duration-300"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-green-400 transition-colors duration-300 z-20"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {showConfirmPassword ? (
@@ -347,7 +465,9 @@ export default function SignUp() {
                           )}
                         </svg>
                       </button>
-                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-green-400/50 via-blue-400/50 to-purple-400/50 transition-all duration-500 ${focusedField === 'confirmPassword' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      {focusedField === 'confirmPassword' && (
+                        <div className="absolute inset-0 rounded-xl border-2 border-gradient-to-r from-green-400/50 via-blue-400/50 to-purple-400/50 pointer-events-none animate-pulse"></div>
+                      )}
                     </div>
                   </div>
 
@@ -362,7 +482,10 @@ export default function SignUp() {
                         className="sr-only"
                         required
                       />
-                      <div className={`w-3 h-3 border-2 border-white/20 rounded bg-black/30 backdrop-blur-xl transition-all duration-300 cursor-pointer ${formData.agreeToTerms ? 'border-cyan-400 bg-gradient-to-br from-cyan-400 to-purple-500' : 'hover:border-white/40'}`}>
+                      <div 
+                        onClick={() => setFormData(prev => ({ ...prev, agreeToTerms: !prev.agreeToTerms }))}
+                        className={`w-3 h-3 border-2 border-white/20 rounded bg-black/30 backdrop-blur-xl transition-all duration-300 cursor-pointer ${formData.agreeToTerms ? 'border-cyan-400 bg-gradient-to-br from-cyan-400 to-purple-500' : 'hover:border-white/40'}`}
+                      >
                         {formData.agreeToTerms && (
                           <svg className="w-2 h-2 text-white m-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -396,14 +519,14 @@ export default function SignUp() {
                       {isLoading ? (
                         <div className="flex items-center justify-center space-x-2">
                           <div className="w-3 h-3 border-2 border-white/60 border-t-white rounded-full animate-spin"></div>
-                          <span className="text-white font-medium tracking-wide text-sm">Creating Account...</span>
+                          <span className="text-white font-medium tracking-wide text-sm">Creating Neural Profile...</span>
                         </div>
                       ) : (
                         <div className="flex items-center justify-center space-x-2">
                           <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                           </svg>
-                          <span className="text-white font-medium tracking-wide text-sm">Create Account</span>
+                          <span className="text-white font-medium tracking-wide text-sm">Create Neural ID</span>
                         </div>
                       )}
                     </div>
@@ -413,7 +536,7 @@ export default function SignUp() {
                 {/* Sign In Link */}
                 <div className={`mt-4 text-center transition-all duration-1500 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
                   <p className="text-slate-400 text-xs tracking-wide">
-                    Already have a Account?{' '}
+                    Already have a Neural ID?{' '}
                     <Link 
                       href="/auth/signin" 
                       className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors duration-300 hover:underline tracking-wider"
@@ -432,6 +555,96 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+
+      {/* Custom CSS for ultra-advanced animations */}
+      <style jsx>{`
+        @keyframes rotate-slowly {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float-complex {
+          0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+          25% { transform: translateY(-15px) rotate(90deg) scale(1.1); }
+          50% { transform: translateY(-30px) rotate(180deg) scale(0.9); }
+          75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        
+        @keyframes pulse-slow-reverse {
+          0%, 100% { opacity: 0.6; transform: scale(1.05); }
+          50% { opacity: 0.3; transform: scale(1); }
+        }
+        
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(1.02); }
+        }
+        
+        @keyframes type-writer {
+          0% { opacity: 0; }
+          50% { opacity: 0.5; }
+          100% { opacity: 1; }
+        }
+        
+        @keyframes border-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes border-spin-reverse {
+          0% { transform: rotate(360deg); }
+          100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes fade-in-up {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes particle-float {
+          0%, 100% { transform: translateY(0px) scale(0); opacity: 0; }
+          50% { transform: translateY(-20px) scale(1); opacity: 1; }
+        }
+        
+        .rotate-slowly { animation: rotate-slowly 20s linear infinite; }
+        .animate-float-complex { animation: float-complex 8s ease-in-out infinite; }
+        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        .animate-pulse-slow-reverse { animation: pulse-slow-reverse 4s ease-in-out infinite; }
+        .animate-gradient-shift { animation: gradient-shift 3s ease infinite; }
+        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .animate-type-writer { animation: type-writer 2s ease-in-out; }
+        .animate-border-spin { animation: border-spin 8s linear infinite; }
+        .animate-border-spin-reverse { animation: border-spin-reverse 8s linear infinite; }
+        .animate-fade-in-up { animation: fade-in-up 1s ease-out 2s both; }
+        .animate-particle-float { animation: particle-float 3s ease-in-out infinite; }
+        
+        .bg-size-200 { background-size: 200% 200%; }
+        
+        .bg-grid-pattern {
+          background-image: 
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+          background-size: 50px 50px;
+        }
+        
+        .bg-gradient-radial {
+          background: radial-gradient(circle, var(--tw-gradient-stops));
+        }
+        
+        .bg-gradient-conic {
+          background: conic-gradient(var(--tw-gradient-stops));
+        }
+      `}</style>
     </div>
   );
 }
