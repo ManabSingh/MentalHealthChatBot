@@ -191,9 +191,9 @@ export default function SignUp() {
           background: `
             radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
             linear-gradient(135deg, 
-              rgba(15, 23, 42, 1) 0%,
+              rgb(4, 10, 81) 0%,
               rgba(30, 27, 75, 1) 25%,
-              rgba(88, 28, 135, 1) 50%,
+              rgb(8, 70, 48) 50%,
               rgba(15, 23, 42, 1) 75%,
               rgba(6, 8, 23, 1) 100%
             )

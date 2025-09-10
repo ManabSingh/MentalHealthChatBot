@@ -57,11 +57,11 @@ export default function SignIn() {
           background: `
             radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
             linear-gradient(135deg, 
-              rgb(3, 35, 56) 0%,
-              rgba(22, 78, 99, 1) 25%,
-              rgb(1, 42, 30) 50%,
+              rgb(4, 10, 81) 0%,
+              rgba(30, 27, 75, 1) 25%,
+              rgb(8, 70, 48) 50%,
               rgba(15, 23, 42, 1) 75%,
-              rgba(3, 7, 18, 1) 100%
+              rgba(6, 8, 23, 1) 100%
             )
           `
         }}

@@ -8,23 +8,44 @@ function Header() {
   const location = useLocation();
   const { locale, setLocale } = useLanguage();
 
-  useEffect(() => {
-    if (!location.hash) return;
-    try {
-      // location.hash may contain query params (e.g. #admin?reload=123). Extract the id safely.
-      const hash = location.hash.startsWith("#")
-        ? location.hash.slice(1)
-        : location.hash;
-      const id = hash.split("?")[0];
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch (e) {
-      // If anything goes wrong, don't break the app
-      // console.debug(e);
-    }
-  }, [location.hash]);
+useEffect(() => {
 
+  const handlePageLoad = () => {
+    // Agar hash hai to element pe scroll karo
+    if (location.hash) {
+      try {
+        const hash = location.hash.startsWith("#")
+          ? location.hash.slice(1)
+          : location.hash;
+        const id = hash.split("?")[0];
+        if (!id) {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          return;
+        }
+        
+        // DOM ready hone ka wait karo
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            // Element nahi mila to top pe jao
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          }
+        }, 100);
+      } catch (e) {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
+    } else {
+      // Koi hash nahi hai to top pe jao
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  };
+
+  // Immediately call karo (page load/refresh ke liye)
+  handlePageLoad();
+
+}, [location.hash, location.pathname]); // Dependencies same rakhe hain
   return (
     <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4">
