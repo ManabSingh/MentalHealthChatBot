@@ -1,8 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SignIn() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [formData, setFormData] = useState({
@@ -36,17 +38,17 @@ export default function SignIn() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Sign-in data:', formData);
-      // Handle sign-in logic here
-    }, 2000);
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  
+  // Simulate loading and redirect to React app
+  setTimeout(() => {
+    setIsLoading(false);
+    // React app ka URL (usually port 3001 ya koi aur port)
+    window.location.href = 'http://localhost:8080'; // 👈 React app ka port
+  }, 1500);
+};
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black">
@@ -197,7 +199,6 @@ export default function SignIn() {
                         onBlur={() => setFocusedField(null)}
                         className="w-full px-5 py-3 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-emerald-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Enter your username"
-                        required
                       />
                       {/* Animated focus border - CHANGED COLORS */}
                       <div className={`absolute inset-0 rounded-2xl border-2 border-gradient-to-r from-emerald-400/50 via-teal-400/50 to-blue-400/50 transition-all duration-500 ${focusedField === 'email' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
@@ -240,7 +241,6 @@ export default function SignIn() {
                         onBlur={() => setFocusedField(null)}
                         className="w-full px-5 py-3 pr-12 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-blue-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Enter your password"
-                        required
                       />
                       {/* Password toggle button - CHANGED HOVER COLOR */}
                       <button
@@ -305,14 +305,14 @@ export default function SignIn() {
     {isLoading ? (
       <div className="flex items-center justify-center space-x-2">
         <div className="w-4 h-4 border-2 border-white/60 border-t-white rounded-full animate-spin"></div>
-        <span className="text-white font-medium tracking-wide text-sm">Connecting...</span>
+        <span className="text-white font-medium tracking-wide text-sm">Connecting to MindSpace...</span>
       </div>
     ) : (
       <div className="flex items-center justify-center space-x-2">
         <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
         </svg>
-        <span  className="text-white font-medium tracking-wide text-sm" >Login</span>
+        <span className="text-white font-medium tracking-wide text-sm">Login</span>
       </div>
     )}
   </div>
