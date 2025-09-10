@@ -9,8 +9,18 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     fs: {
-      allow: ["./client", "./shared"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+      // Allow access to parent directories and your project structure
+      allow: [
+        "..", // Allow parent directory access
+        "./client", 
+        "./shared",
+        // Add your specific project paths
+        "/Users/sahilrajdubey/Developer/SIH25/MentalHealthChatBot",
+        "/Users/sahilrajdubey/Developer/SIH25/MentalHealthChatBot/mainapp",
+        "/Users/sahilrajdubey/Developer/SIH25/MentalHealthChatBot/mainapp/builder-nova-realm"
+      ],
+      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**"],
+      // Remove server/** from deny list since you're using it as middleware
     },
   },
   build: {
