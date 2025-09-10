@@ -1,12 +1,12 @@
 
-import Welcome from "./welcome";
+import Welcome from "./dashboard/welcome";
 
 
 export const metadata = {
   title: "MindSpace",
   description: "Your Mental Health Companion",
   icons: {
-    icon: "/webbg.png",
+    icon: "/public/icons/webbg.png",
   },
 };
 

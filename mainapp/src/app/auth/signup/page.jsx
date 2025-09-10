@@ -118,8 +118,8 @@ export default function SignUp() {
       </div>
 
       {/* Main content container */}
-      <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
-        <div className={`w-full max-w-sm transition-all duration-2000 ease-out ${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}`}>
+      <div className="relative z-20 min-h-screen flex items-center justify-center p-4">
+        <div className={`w-full max-w-md transition-all duration-2000 ease-out ${mounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'}`}>
           
           {/* Ultra-modern glass container */}
           <div className="relative group">
@@ -143,16 +143,16 @@ export default function SignUp() {
                 ))}
               </div>
 
-              <div className="relative p-6">
+              <div className="relative p-5">
                 {/* Header Section */}
-                <div className={`text-center mb-6 transition-all duration-1500 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'}`}>
+                <div className={`text-center mb-4 transition-all duration-1500 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'}`}>
                   {/* Logo/Icon with advanced animation */}
-                  <div className="relative mb-4 flex justify-center">
+                  <div className="relative mb-3 flex justify-center">
                     <div className="relative group">
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 rounded-3xl blur-xl animate-pulse-glow"></div>
-                      <div className="relative w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                      <div className="relative w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl"></div>
-                        <svg className="w-8 h-8 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                         </svg>
                       </div>
@@ -160,11 +160,11 @@ export default function SignUp() {
                   </div>
 
                   {/* Headline with neural network theme */}
-                  <h1 className="text-3xl font-black mb-2">
+                  <h1 className="text-2xl font-black mb-1">
                     <span className="bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent animate-gradient-shift bg-size-200">
                         MINDSPACE
                     </span>
-                    <span className="block text-xl bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-light tracking-widest">
+                    <span className="block text-lg bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-light tracking-widest">
                       NEURAL REGISTRY
                     </span>
                   </h1>
@@ -177,13 +177,13 @@ export default function SignUp() {
                 </div>
 
                 {/* Sign-Up Form with ultra-modern styling */}
-                <form onSubmit={handleSubmit} className={`space-y-4 transition-all duration-1500 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <form onSubmit={handleSubmit} className={`space-y-3 transition-all duration-1500 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   
                   {/* Full Name Field */}
                   <div className="relative group">
-                    <label className="block text-xs font-semibold text-slate-300 mb-2 tracking-wider">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 tracking-wider">
                       <span className="flex items-center space-x-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         <span>Full Name</span>
@@ -197,19 +197,19 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('fullName')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-5 py-3 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Enter your full name"
                         required
                       />
-                      <div className={`absolute inset-0 rounded-2xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'fullName' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'fullName' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
                     </div>
                   </div>
 
                   {/* Email Field */}
                   <div className="relative group">
-                    <label className="block text-xs font-semibold text-slate-300 mb-2 tracking-wider">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 tracking-wider">
                       <span className="flex items-center space-x-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                         </svg>
                         <span>Email Address</span>
@@ -223,19 +223,19 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('email')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-5 py-3 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-cyan-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Enter your email address"
                         required
                       />
-                      <div className={`absolute inset-0 rounded-2xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'email' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 transition-all duration-500 ${focusedField === 'email' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
                     </div>
                   </div>
 
                   {/* Password Field */}
                   <div className="relative group">
-                    <label className="block text-xs font-semibold text-slate-300 mb-2 tracking-wider">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 tracking-wider">
                       <span className="flex items-center space-x-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                         <span>Password</span>
@@ -249,7 +249,7 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('password')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-5 py-3 pr-12 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-purple-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-purple-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Create a password"
                         required
                       />
@@ -258,7 +258,7 @@ export default function SignUp() {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-purple-400 transition-colors duration-300"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {showPassword ? (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L8.464 8.464M9.878 9.878a3 3 0 00-3-3M21 12c-1.27 4.057-5.022 7-9.543 7" />
                           ) : (
@@ -266,15 +266,15 @@ export default function SignUp() {
                           )}
                         </svg>
                       </button>
-                      <div className={`absolute inset-0 rounded-2xl border-2 border-gradient-to-r from-purple-400/50 via-pink-400/50 to-cyan-400/50 transition-all duration-500 ${focusedField === 'password' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-purple-400/50 via-pink-400/50 to-cyan-400/50 transition-all duration-500 ${focusedField === 'password' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
                     </div>
                   </div>
 
                   {/* Confirm Password Field */}
                   <div className="relative group">
-                    <label className="block text-xs font-semibold text-slate-300 mb-2 tracking-wider">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1 tracking-wider">
                       <span className="flex items-center space-x-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>Confirm Password</span>
@@ -288,7 +288,7 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         onFocus={() => setFocusedField('confirmPassword')}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-5 py-3 pr-12 bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl text-white placeholder-slate-400/60 focus:outline-none focus:border-green-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
+                        className="w-full px-4 py-2.5 pr-10 bg-black/30 backdrop-blur-xl border border-white/10 rounded-xl text-white placeholder-slate-400/60 focus:outline-none focus:border-green-400/50 transition-all duration-500 font-medium tracking-wide text-sm"
                         placeholder="Confirm your password"
                         required
                       />
@@ -297,7 +297,7 @@ export default function SignUp() {
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-green-400 transition-colors duration-300"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {showConfirmPassword ? (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L8.464 8.464M9.878 9.878a3 3 0 00-3-3M21 12c-1.27 4.057-5.022 7-9.543 7" />
                           ) : (
@@ -305,12 +305,12 @@ export default function SignUp() {
                           )}
                         </svg>
                       </button>
-                      <div className={`absolute inset-0 rounded-2xl border-2 border-gradient-to-r from-green-400/50 via-blue-400/50 to-purple-400/50 transition-all duration-500 ${focusedField === 'confirmPassword' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
+                      <div className={`absolute inset-0 rounded-xl border-2 border-gradient-to-r from-green-400/50 via-blue-400/50 to-purple-400/50 transition-all duration-500 ${focusedField === 'confirmPassword' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}></div>
                     </div>
                   </div>
 
                   {/* Terms and Conditions */}
-                  <div className="flex items-start space-x-3 pt-2">
+                  <div className="flex items-start space-x-3 pt-1">
                     <div className="relative mt-0.5">
                       <input
                         type="checkbox"
@@ -320,9 +320,9 @@ export default function SignUp() {
                         className="sr-only"
                         required
                       />
-                      <div className={`w-4 h-4 border-2 border-white/20 rounded bg-black/30 backdrop-blur-xl transition-all duration-300 cursor-pointer ${formData.agreeToTerms ? 'border-cyan-400 bg-gradient-to-br from-cyan-400 to-purple-500' : 'hover:border-white/40'}`}>
+                      <div className={`w-3 h-3 border-2 border-white/20 rounded bg-black/30 backdrop-blur-xl transition-all duration-300 cursor-pointer ${formData.agreeToTerms ? 'border-cyan-400 bg-gradient-to-br from-cyan-400 to-purple-500' : 'hover:border-white/40'}`}>
                         {formData.agreeToTerms && (
-                          <svg className="w-2.5 h-2.5 text-white m-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-2 h-2 text-white m-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
@@ -344,21 +344,21 @@ export default function SignUp() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="relative w-full mt-6 group"
+                    className="relative w-full mt-4 group"
                   >
                     {/* Simple border glow */}
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/40 to-purple-500/40 rounded-xl blur-sm opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
                     
                     {/* Button content */}
-                    <div className="relative bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl py-3 px-5 group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-300">
+                    <div className="relative bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl py-2.5 px-4 group-hover:border-white/30 group-hover:bg-white/10 transition-all duration-300">
                       {isLoading ? (
                         <div className="flex items-center justify-center space-x-2">
-                          <div className="w-4 h-4 border-2 border-white/60 border-t-white rounded-full animate-spin"></div>
+                          <div className="w-3 h-3 border-2 border-white/60 border-t-white rounded-full animate-spin"></div>
                           <span className="text-white font-medium tracking-wide text-sm">Creating Neural Profile...</span>
                         </div>
                       ) : (
                         <div className="flex items-center justify-center space-x-2">
-                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                           </svg>
                           <span className="text-white font-medium tracking-wide text-sm">Create Neural ID</span>
@@ -369,11 +369,11 @@ export default function SignUp() {
                 </form>
 
                 {/* Sign In Link */}
-                <div className={`mt-6 text-center transition-all duration-1500 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+                <div className={`mt-4 text-center transition-all duration-1500 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
                   <p className="text-slate-400 text-xs tracking-wide">
                     Already have a Neural ID?{' '}
                     <Link 
-                      href="/signin" 
+                      href="/auth/signin" 
                       className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors duration-300 hover:underline tracking-wider"
                     >
                       Sign In
@@ -382,7 +382,7 @@ export default function SignUp() {
                 </div>
 
                 {/* Bottom decoration */}
-                <div className={`mt-6 flex justify-center transition-all duration-1500 delay-900 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
+                <div className={`mt-4 flex justify-center transition-all duration-1500 delay-900 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
                   <div className="w-12 h-1 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 rounded-full animate-gradient-shift"></div>
                 </div>
               </div>

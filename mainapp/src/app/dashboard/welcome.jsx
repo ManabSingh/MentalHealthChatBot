@@ -146,7 +146,7 @@ export default function Welcome() {
             <div className="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-2xl mx-auto">
               
               {/* Sign Up Button */}
-              <Link href="/signup" className="w-full lg:w-auto">
+              <Link href="/auth/signup" className="w-full lg:w-auto">
                 <button
                   onMouseEnter={() => setIsHovering('signup')}
                   onMouseLeave={() => setIsHovering('')}
@@ -202,7 +202,7 @@ export default function Welcome() {
               </Link>
 
               {/* Sign In Button */}
-              <Link href="/signin" className="w-full lg:w-auto">
+              <Link href="/auth/signin" className="w-full lg:w-auto">
                 <button
                   onMouseEnter={() => setIsHovering('signin')}
                   onMouseLeave={() => setIsHovering('')}

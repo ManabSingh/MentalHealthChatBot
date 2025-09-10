@@ -324,7 +324,7 @@ export default function SignIn() {
                   <p className="text-slate-400 text-xs tracking-wide">
                     Don't have an Account?{' '}
                     <Link 
-                      href="/signup" 
+                      href="/auth/signup" 
                       className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors duration-300 hover:underline tracking-wider"
                     >
                       Register 
