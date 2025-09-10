@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "ਘਰ",
+    "resources": "ਸਰੋਤ",
+    "growTree": "ਆਪਣਾ ਰੁੱਖ ਵਧਾਓ",
+    "mindFlights": "ਮਾਈਂਡ ਫਲਾਈਟਸ",
+    "community": "ਕਮਿਊਨਿਟੀ ਬਲੌਗ",
+    "chatSupport": "ਚੈਟ ਸਹਾਇਤਾ",
+    "about": "ਸਾਡੇ ਬਾਰੇ",
+    "contact": "ਸੰਪਰਕ"
+  },
+  "common": {
+    "language": "ਭਾਸ਼ਾ",
+    "selectLanguage": "ਭਾਸ਼ਾ ਚੁਣੋ"
+  }
+}
+
+

@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "Home",
+    "resources": "Resources",
+    "growTree": "Grow Your Tree",
+    "mindFlights": "Mind Flights",
+    "community": "Community Blog",
+    "chatSupport": "Chat Support",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "common": {
+    "language": "Language",
+    "selectLanguage": "Select Language"
+  }
+}
+
+

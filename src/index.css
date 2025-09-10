@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Paper plane keyframes */
+@keyframes fly-plane {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(50vw) translateY(-10vh) rotate(10deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(100vw) translateY(-20vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes drift {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Gentle float for background planes */
+@keyframes float-plane {
+  0% { transform: translateY(0) translateX(0) rotate(-3deg); }
+  25% { transform: translateY(-8px) translateX(6px) rotate(0deg); }
+  50% { transform: translateY(0) translateX(12px) rotate(3deg); }
+  75% { transform: translateY(6px) translateX(6px) rotate(0deg); }
+  100% { transform: translateY(0) translateX(0) rotate(-3deg); }
+}
+
+/* Paper texture */
+.paper-texture {
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.85) 60%, rgba(255,255,255,0.8)),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 24px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+
+.plane-fly {
+  animation: fly-plane 2.2s ease-in forwards;
+}
+
+.drift-slow {
+  animation: drift 3s ease-in-out infinite;
+}
+
+.float-plane {
+  animation: float-plane 6s ease-in-out infinite;
+}

@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "मुख्यपृष्ठ",
+    "resources": "संसाधने",
+    "growTree": "तुमचे झाड वाढवा",
+    "mindFlights": "माइंड फ्लाइट्स",
+    "community": "समुदाय ब्लॉग",
+    "chatSupport": "चॅट सपोर्ट",
+    "about": "आमच्याबद्दल",
+    "contact": "संपर्क"
+  },
+  "common": {
+    "language": "भाषा",
+    "selectLanguage": "भाषा निवडा"
+  }
+}
+
+

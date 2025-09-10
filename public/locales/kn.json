@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "ಮುಖಪುಟ",
+    "resources": "ವನರಳು",
+    "growTree": "ನಿಮ್ಮ ಮರವನ್ನು ಬೆಳೆಸಿ",
+    "mindFlights": "ಮೈಂಡ್ ಫ್ಲೈಟ್ಸ್",
+    "community": "ಸಮುದಾಯ ಬ್ಲಾಗ್",
+    "chatSupport": "ಚಾಟ್ ಬೆಂಬಲ",
+    "about": "ನಮ್ಮ ಬಗ್ಗೆ",
+    "contact": "ಸಂಪರ್ಕ"
+  },
+  "common": {
+    "language": "ಭಾಷೆ",
+    "selectLanguage": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  }
+}
+
+

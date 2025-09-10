@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "হোম",
+    "resources": "রিসোর্সেস",
+    "growTree": "আপনার গাছ বাড়ান",
+    "mindFlights": "মাইন্ড ফ্লাইটস",
+    "community": "কমিউনিটি ব্লগ",
+    "chatSupport": "চ্যাট সাপোর্ট",
+    "about": "আমাদের সম্পর্কে",
+    "contact": "যোগাযোগ"
+  },
+  "common": {
+    "language": "ভাষা",
+    "selectLanguage": "ভাষা নির্বাচন করুন"
+  }
+}
+
+

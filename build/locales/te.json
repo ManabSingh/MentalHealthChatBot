@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "హోమ్",
+    "resources": "వనరులు",
+    "growTree": "మీ చెట్టును పెంచండి",
+    "mindFlights": "మైండ్ ఫ్లైట్స్",
+    "community": "కమ్యూనిటీ బ్లాగ్",
+    "chatSupport": "చాట్ సపోర్ట్",
+    "about": "మా గురించి",
+    "contact": "సంప్రదించండి"
+  },
+  "common": {
+    "language": "భాష",
+    "selectLanguage": "భాషను ఎంచుకోండి"
+  }
+}
+
+
