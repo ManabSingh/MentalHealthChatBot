@@ -1,6 +1,48 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+// Add this import at the top
+import { authAPI, tokenManager } from '../../lib/auth';
+
+// Replace your handleSubmit function with:
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  
+  try {
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      throw new Error('Passwords do not match');
+    }
+
+    // Call backend API
+    const response = await authAPI.signup({
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword
+    });
+    
+    // Store tokens
+    tokenManager.setTokens(
+      response.data.tokens.accessToken,
+      response.data.tokens.refreshToken
+    );
+    
+    // Success feedback
+    console.log('Neural profile created successfully:', response.data.user);
+    
+    // Redirect to dashboard or show success message
+    window.location.href = '/dashboard';
+    
+  } catch (error) {
+    console.error('Signup failed:', error.message);
+    // You can add a state for error display
+    alert(`Signup failed: ${error.message}`);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
 export default function SignUp() {
   const [mounted, setMounted] = useState(false);
