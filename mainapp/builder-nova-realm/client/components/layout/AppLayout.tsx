@@ -31,7 +31,7 @@ function Header() {
         <Link to="/" className="flex items-center gap-2 text-lg font-bold">
           <span className="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-primary to-emerald-500" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-600">
-            Sahaara
+            MindSpace
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">

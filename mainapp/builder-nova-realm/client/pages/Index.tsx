@@ -16,11 +16,11 @@ export default function Index() {
       <section className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-primary/10 via-accent/20 to-transparent p-6 md:p-10">
         <div className="max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background/70 px-3 py-1 text-xs text-primary shadow">
-            <ShieldCheck className="h-3.5 w-3.5" /> Stigma-free digital
+            <ShieldCheck className="h-3.5 w-3.5" /> MindSpace - free digital
             psychological support for campuses
           </div>
           <h1 className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-3xl font-extrabold leading-tight text-transparent md:text-5xl">
-            Sahaara: Digital Psychological Intervention System
+           MindSpace : Digital Psychological Intervention System
           </h1>
           <p className="mt-3 text-base text-muted-foreground md:text-lg">
             Early detection, confidential care, regional language resources,
