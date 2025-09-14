@@ -1,5 +1,5 @@
 #! /bin/bash
-pushd builder-nova-realm
+pushd MindSpace
 npm run dev &
 popd
 npm run dev
